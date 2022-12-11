@@ -23,7 +23,8 @@ class MessageWebSocketServiceImpl(
 
         return try {
             socket = client.webSocketSession {
-                url(MessageWebSocketService.Endpoints.ChatWebSocketConnection.url)
+                url("${MessageWebSocketService.Endpoints.ChatWebSocketConnection.url}?username=$username")
+
             }
             if (socket?.isActive == true) {
                 Resource.Success(Unit)
