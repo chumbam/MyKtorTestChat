@@ -8,7 +8,7 @@ interface MessageApiService {
     suspend fun getAllMessages(): List<Message>
 
     companion object {
-        const val URL_BASE = "10.0.2.2:8082"
+        const val URL_BASE = "http://10.0.3.2:8082"
     }
 
     sealed class Endpoints(val url: String) {

@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.Flow
 interface MessageWebSocketService {
 
     companion object {
-        const val URL_BASE = "10.0.2.2:8082"
+        const val URL_BASE = "ws://10.0.3.2:8082"
     }
 
     sealed class Endpoints(val url: String) {
-        object ChatWebSocketConnection : Endpoints("$URL_BASE/chat-socket")
+        object ChatWebSocketConnection : Endpoints("$URL_BASE/my-chat-socket")
     }
 
     suspend fun initWebSocketSession(username: String): Resource<Unit>

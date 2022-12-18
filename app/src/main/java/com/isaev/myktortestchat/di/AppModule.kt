@@ -14,12 +14,15 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.features.websocket.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
     fun provideHttpClient(): HttpClient {
@@ -27,7 +30,11 @@ object AppModule {
             install(Logging)
             install(WebSockets)
             install(JsonFeature) {
-                serializer = KotlinxSerializer()
+                serializer = KotlinxSerializer(
+                    json = kotlinx.serialization.json.Json {
+                        explicitNulls = false
+                    }
+                )
             }
         }
     }

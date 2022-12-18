@@ -52,8 +52,9 @@ class MessageWebSocketServiceImpl(
                 ?.receiveAsFlow()
                 ?.filter { it is Frame.Text }
                 ?.map {
+                    val format = Json { ignoreUnknownKeys = true }
                     val json = (it as? Frame.Text)?.readText() ?: ""
-                    val messageDTO = Json.decodeFromString<MessageDTO>(string = json)
+                    val messageDTO = format.decodeFromString<MessageDTO>(string = json)
                     messageDTO.toMessage()
                 } ?: flow { }
         } catch (e: Exception) {

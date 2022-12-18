@@ -3,22 +3,24 @@ package com.isaev.myktortestchat.data.remote.dto
 import com.isaev.myktortestchat.domain.model.Message
 import java.text.DateFormat
 import java.util.Date
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MessageDTO(
-    val text: String,
-    val timestamp: Long,
-    val username: String,
+    val username: String? = null,
+    val message: String? = null,
+    val sendTime: Long? = null,
     val id: String
 ) {
 
     fun toMessage(): Message {
-        val date =  Date(timestamp)
+        val date = sendTime?.let { Date(it) }
         val formattedDate = DateFormat
             .getDateInstance(DateFormat.DEFAULT)
-            .format(date)
+            .format(date ?: 0)
 
         return Message(
-            text = text,
+            text = message,
             time = formattedDate,
             username = username
         )

@@ -27,12 +27,13 @@ fun ConnectChatScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(8.dp),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.Center
         ) {
 
             TextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = viewModel.username.value,
                 onValueChange = viewModel::onChangeUsername,
                 placeholder = { Text(text = "Enter username...") }
